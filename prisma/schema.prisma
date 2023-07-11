@@ -1,0 +1,177 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model categorieCourrier {
+  @@map(name:"sd_categorie_courrier")
+  id         Int       @id @default(autoincrement())
+  code       String?   @db.VarChar(10)
+  libelle    String?   @db.VarChar(100)
+  created_on DateTime? @db.Timestamp(6)
+  created_by Int?
+  updated_on DateTime? @db.Timestamp(6)
+  updated_by Int?
+  del        Boolean?  @default(false)
+}
+
+model typeCourrier {
+  @@map(name: "sd_type_courrier")
+  id         Int       @id @default(autoincrement())
+  code       String?   @db.VarChar(10)
+  libelle    String?   @db.VarChar(100)
+  created_on DateTime? @db.Timestamp(6)
+  created_by Int?
+  updated_on DateTime? @db.Timestamp(6)
+  updated_by Int?
+  del        Boolean?  @default(false)
+}
+
+// model sd_correspondant_courrier {
+//   id                    Int       @id @default(autoincrement())
+//   id_type_correspondant Int?
+//   nom                   String?   @db.VarChar(150)
+//   prenoms               String?   @db.VarChar(150)
+//   adresse               String?
+//   ville                 String?   @db.VarChar(100)
+//   created_on            DateTime? @db.Timestamp(6)
+//   created_by            Int?
+//   updated_on            DateTime? @db.Timestamp(6)
+//   updated_by            Int?
+//   del                   Boolean?  @default(false)
+// }
+
+// model courrier {
+//   @@map(name: "sd_courrier")
+//   id                    Int       @id @default(autoincrement())
+//   id_registre           Int?
+//   id_categorie_courrier Int?
+//   id_type_courrier      Int?
+//   id_correspondant      Int?
+//   code                  String?   @db.VarChar(50)
+//   libelle               String?   @db.VarChar(100)
+//   created_on            DateTime? @db.Timestamp(6)
+//   created_by            Int?
+//   updated_on            DateTime? @db.Timestamp(6)
+//   updated_by            Int?
+//   del                   Boolean?  @default(false)
+// }
+
+// model sd_diffusion_courrier {
+//   id_courrier    Int
+//   id_service     Int
+//   date_diffusion DateTime? @db.Timestamp(6)
+//   commentaire    String?
+//   created_on     DateTime? @db.Timestamp(6)
+//   created_by     Int?
+//   updated_on     DateTime? @db.Timestamp(6)
+//   updated_by     Int?
+
+//   @@id([id_courrier, id_service])
+// }
+
+// model document {
+//   @@map(name: "sd_document")
+//   id          Int       @id @default(autoincrement())
+//   id_courrier Int?
+//   id_dossier  Int?
+//   titre       String?   @db.VarChar(100)
+//   description String?
+//   fichier     String?   @db.VarChar(150)
+//   created_on  DateTime? @db.Timestamp(6)
+//   created_by  Int?
+//   updated_on  DateTime? @db.Timestamp(6)
+//   updated_by  Int?
+//   del         Boolean?  @default(false)
+// }
+
+// model sd_imputation_courrier {
+//   id_courrier     Int
+//   id_service      Int
+//   date_imputation DateTime? @db.Timestamp(6)
+//   commentaire     String?
+//   created_on      DateTime? @db.Timestamp(6)
+//   created_by      Int?
+//   updated_on      DateTime? @db.Timestamp(6)
+//   updated_by      Int?
+
+//   @@id([id_courrier, id_service])
+// }
+
+// model profil {
+//   @@map(name: "sd_profil")
+//   id         Int       @id @default(autoincrement())
+//   code       String?   @db.VarChar(10)
+//   libelle    String?   @db.VarChar(100)
+//   created_on DateTime? @db.Timestamp(6)
+//   created_by Int?
+//   updated_on DateTime? @db.Timestamp(6)
+//   updated_by Int?
+//   del        Boolean?  @default(false)
+//   utilisateurs  utilisateur[]
+// }
+
+ model registreCourrier {
+   @@map(name: "sd_registre_courrier")
+   id         Int       @id @default(autoincrement())
+   code       String?   @db.VarChar(10)
+   libelle    String?   @db.VarChar(100)
+   created_on DateTime? @db.Timestamp(6)
+   created_by Int?
+   updated_on DateTime? @db.Timestamp(6)
+   updated_by Int?
+   del        Boolean?  @default(false)
+}
+
+// model service {
+//   @@map( name: "sd_service")
+//   id                Int       @id @default(autoincrement())
+//   id_service_parent Int?
+//   code              String?   @db.VarChar(10)
+//   libelle           String?   @db.VarChar(100)
+//   created_on        DateTime? @db.Timestamp(6)
+//   created_by        Int?
+//   updated_on        DateTime? @db.Timestamp(6)
+//   updated_by        Int?
+//   del               Boolean?  @default(false)
+//   parent            service?  @relation("ServiceHierarchie", fields:[id_service_parent], references: [id])
+//   enfants           service[]  @relation("ServiceHierarchie")
+// }
+
+model typeCorrespondant {
+  @@map(name: "sd_type_correspondant")
+  id         Int       @id @default(autoincrement())
+  code       String?   @db.VarChar(10)
+  libelle    String?   @db.VarChar(100)
+  created_on DateTime? @db.Timestamp(6)
+  created_by Int?
+  updated_on DateTime? @db.Timestamp(6)
+  updated_by Int?
+  del        Boolean?  @default(false)
+}
+
+
+// model utilisateur {
+//   @@map(name: "sd_utilisateur")
+//   id         Int       @id @default(autoincrement())
+//   id_profil  Int
+//   id_service Int?
+//   matricule  String?   @db.VarChar(20)
+//   nom        String?   @db.VarChar(150)
+//   prenoms    String?   @db.VarChar(150)
+//   login      String?   @db.VarChar(150)
+//   passwd     String?   @db.VarChar(150)
+//   email      String?   @db.VarChar(150)
+//   telephone  String?   @db.VarChar(20)
+//   created_on DateTime? @db.Timestamp(6)
+//   created_by Int?
+//   updated_on DateTime? @db.Timestamp(6)
+//   updated_by Int?
+//   del        Boolean?  @default(false)
+//   profil     profil    @relation(fields: [id_profil], references:[id])
+// }
+
